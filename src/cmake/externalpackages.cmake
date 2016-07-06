@@ -63,23 +63,27 @@ endif ()
 
 ###########################################################################
 # TIFF
+hunter_add_package(TIFF)
 find_package (TIFF REQUIRED)
 include_directories (${TIFF_INCLUDE_DIR})
 
 
 ###########################################################################
 # Several packages need Zlib
+hunter_add_package(ZLIB)
 find_package (ZLIB REQUIRED)
 include_directories (${ZLIB_INCLUDE_DIR})
 
 
 ###########################################################################
 # PNG
+hunter_add_package(PNG)
 find_package (PNG REQUIRED)
 
 
 ###########################################################################
 # IlmBase & OpenEXR setup
+
 
 find_package (OpenEXR REQUIRED)
 #OpenEXR 2.2 still has problems with importing ImathInt64.h unqualified
@@ -126,6 +130,7 @@ if (BOOST_CUSTOM)
     # Boost_VERSION, Boost_INCLUDE_DIRS, Boost_LIBRARY_DIRS, Boost_LIBRARIES.
 else ()
     set (Boost_COMPONENTS filesystem regex system thread)
+	hunter_add_package(Boost COMPONENTS ${Boost_COMPONENTS})
     find_package (Boost 1.42 REQUIRED
                   COMPONENTS ${Boost_COMPONENTS}
                  )
@@ -310,6 +315,7 @@ endif (USE_OPENGL)
 
 ###########################################################################
 # BZIP2 - used by ffmped and freetype
+hunter_add_package(BZip2)
 find_package (BZip2)   # Used by ffmpeg
 if (NOT BZIP2_FOUND)
     set (BZIP2_LIBRARIES "")
@@ -348,6 +354,7 @@ if (USE_FIELD3D)
         # N.B. For a custom version, the caller had better set up the
         # variables HDF5_INCLUDE_DIRS and HDF5_LIBRARIES.
     else ()
+		hunter_add_package(hdf5)
         find_library (HDF5_LIBRARIES
                       NAMES hdf5
                       PATHS "${THIRD_PARTY_TOOLS_HOME}/lib/"
@@ -515,6 +522,7 @@ endif()
 # OpenCV setup
 
 if (USE_OPENCV)
+	hunter_add_package(OpenCV)
     find_package (OpenCV)
     if (OpenCV_FOUND)
         add_definitions ("-DUSE_OPENCV")
@@ -529,6 +537,7 @@ endif ()
 # Freetype setup
 
 if (USE_FREETYPE)
+	hunter_add_package(freetype)
     find_package (Freetype)
     if (FREETYPE_FOUND)
         add_definitions ("-DUSE_FREETYPE")
@@ -551,6 +560,7 @@ endif ()
 # OpenSSL Setup
 
 if (USE_OPENSSL)
+	hunter_add_package(OpenSSL)
     find_package (OpenSSL)
     if (OPENSSL_FOUND)
         if (NOT OpenSSL_FIND_QUIETLY)
