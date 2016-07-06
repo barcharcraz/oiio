@@ -1,17 +1,17 @@
+cmake_minimum_required (VERSION 3.0)
 include("src/cmake/modules/HunterGate.cmake")
 HunterGate(
     URL "https://github.com/ruslo/hunter/archive/v0.14.29.tar.gz"
     SHA1 "9c29c30fff99b7c1479b2e9d4926dcc3f8d364e0"
 )
 project (OpenImageIO)
-
 # Release version of the library
 set (OIIO_VERSION_MAJOR 1)
 set (OIIO_VERSION_MINOR 7)
 set (OIIO_VERSION_PATCH 3)
 set (OIIO_VERSION_RELEASE_TYPE "dev")   # "dev", "betaX", "RCY", ""
 
-cmake_minimum_required (VERSION 2.6)
+
 if (NOT CMAKE_VERSION VERSION_LESS 2.8.4)
     cmake_policy (SET CMP0017 NEW)
 endif ()
@@ -341,7 +341,7 @@ if (LINKSTATIC)
     set (Boost_USE_STATIC_LIBS 1)
 endif ()
 
-set (CMAKE_MODULE_PATH
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
      "${PROJECT_SOURCE_DIR}/src/cmake/modules"
      "${PROJECT_SOURCE_DIR}/src/cmake")
 

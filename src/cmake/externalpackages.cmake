@@ -2,6 +2,7 @@
 # Find libraries
 
 # When not in VERBOSE mode, try to make things as quiet as possible
+
 if (NOT VERBOSE)
     set (Boost_FIND_QUIETLY true)
     set (FFmpeg_FIND_QUIETLY true)
@@ -84,7 +85,7 @@ find_package (PNG REQUIRED)
 ###########################################################################
 # IlmBase & OpenEXR setup
 
-
+hunter_add_package(OpenEXR)
 find_package (OpenEXR REQUIRED)
 #OpenEXR 2.2 still has problems with importing ImathInt64.h unqualified
 #thus need for ilmbase/OpenEXR
